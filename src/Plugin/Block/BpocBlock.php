@@ -49,9 +49,14 @@ class BpocBlock extends BlockBase implements BlockPluginInterface
             $name = $this->t('to no one');
         }
         return array(
-            '#markup' => $this->t('Hello @name!', array(
+            '#markup' => $this->t('<div id="bpoc-root" data-name="@name"></div>', array(
                 '@name' => $name,
             )),
+            '#attached' => array(
+                'library' => array(
+                    'bpoc/bpoc',
+                ),
+            ),
         );
     }
 

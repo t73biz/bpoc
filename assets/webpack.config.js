@@ -1,12 +1,14 @@
+const path = require('path');
+
 module.exports = {
-    entry: ['./lib/react/index.js'],
+    entry: ['./js/lib/react/index.jsx'],
     output: {
-        path: __dirname + 'dist',
+        path: path.resolve(__dirname, 'js/dist'),
         filename: 'bpoc.bundle.js'
     },
     module: {
         loaders: [
-            {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
+            {test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader'},
             { test: /\.css$/, loader: "style-loader!css-loader" }
         ]
     }
