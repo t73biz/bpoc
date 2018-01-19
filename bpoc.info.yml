@@ -1,0 +1,6 @@
+name: Bodyless Proof of Concept
+type: module
+description: "Bodyless Proof of Concept"
+Package: Bpoc
+core: 8.x
+configure: bpoc.settings
