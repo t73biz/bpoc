@@ -1,0 +1,7 @@
+{
+  "name": "bpoc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ronald Chaplin <rchaplin@t73.biz>",
+  "license": "MIT"
+}
