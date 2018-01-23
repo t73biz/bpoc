@@ -1,5 +1,5 @@
 <?php
-namespace Drupal\bpoc\Plugin\Block;
+namespace Drupal\t73biz\bpoc\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Block\BlockPluginInterface;
@@ -9,22 +9,12 @@ use Drupal\Core\Form\FormStateInterface;
  * Provides a 'BPOC' Block
  *
  * @Block(
- *   id = "bpoc_block",
+ *   id = "t73_bpoc_block",
  *   admin_label = @Translation("BPOC block"),
  * )
  */
 class BpocBlock extends BlockBase implements BlockPluginInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function defaultConfiguration() {
-        $default_config = \Drupal::config('bpoc.settings');
-        return [
-            'bpoc_block_name' => $default_config->get('bpoc.name'),
-        ];
-    }
-
     /**
      * Builds and returns the renderable array for this block plugin.
      *
@@ -46,12 +36,13 @@ class BpocBlock extends BlockBase implements BlockPluginInterface
             $name = $config['bpoc_block_name'];
         }
         else {
-            $name = $this->t('to no one');
+            $name = $this->t('World');
         }
+
+        // We pass in the configuration variable `name` here as a data attribute rather than passing it to the script
+        // as we want React to use the dom for this. Passing in via the script might be better for larger data sets.
         return array(
-            '#markup' => $this->t('<div id="bpoc-root" data-name="@name"></div>', array(
-                '@name' => $name,
-            )),
+            '#markup' => $this->t('<div id="bpoc-root" data-name="@name"></div>', ['@name' => $name,]),
             '#attached' => array(
                 'library' => array(
                     'bpoc/bpoc',
@@ -61,7 +52,31 @@ class BpocBlock extends BlockBase implements BlockPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Gets default configuration for this plugin.
+     *
+     * @return array
+     *   An associative array with the default configuration.
+     */
+    public function defaultConfiguration() {
+        $default_config = \Drupal::config('bpoc.settings');
+        return [
+            'bpoc_block_name' => $default_config->get('bpoc.name'),
+        ];
+    }
+
+    /**
+     * Returns the configuration form elements specific to this block plugin.
+     *
+     * Blocks that need to add form elements to the normal block configuration
+     * form should implement this method.
+     *
+     * @param array $form
+     *   The form definition array for the block configuration form.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The current state of the form.
+     *
+     * @return array
+     *   The renderable form array representing the entire configuration form.
      */
     public function blockForm($form, FormStateInterface $form_state) {
         $form = parent::blockForm($form, $form_state);
@@ -79,7 +94,19 @@ class BpocBlock extends BlockBase implements BlockPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Adds block type-specific submission handling for the block form.
+     *
+     * Note that this method takes the form structure and form state for the full
+     * block configuration form as arguments, not just the elements defined in
+     * BlockPluginInterface::blockForm().
+     *
+     * @param array $form
+     *   The form definition array for the full block configuration form.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The current state of the form.
+     *
+     * @see \Drupal\Core\Block\BlockPluginInterface::blockForm()
+     * @see \Drupal\Core\Block\BlockPluginInterface::blockValidate()
      */
     public function blockSubmit($form, FormStateInterface $form_state) {
         $this->configuration['bpoc_block_name'] = $form_state->getValue('bpoc_block_name');
