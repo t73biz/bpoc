@@ -1,4 +1,0 @@
-/node_modules/
-/yarn-error.log
-js/dist/*
-!js/dist/.keep
