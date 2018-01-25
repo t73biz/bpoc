@@ -1,10 +1,16 @@
 {
     "name": "t73biz/bpoc",
+    "description": "Bodyless Block Module Proof of Concept, integrating React",
+    "type": "drupal-module",
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev",
+    "require": {
+      "drupal/core": "~8.3"
+    },
     "authors": [
-        {
-            "name": "Ronald Chaplin",
-            "email": "rchaplin@t73.biz"
-        }
-    ],
-    "require": {}
+      {
+        "name": "Ronald Chaplin",
+        "email": "rchaplin@t73.biz"
+      }
+    ]
 }
