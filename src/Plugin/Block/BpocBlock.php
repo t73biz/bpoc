@@ -1,5 +1,5 @@
 <?php
-namespace Drupal\t73biz\bpoc\Plugin\Block;
+namespace Drupal\bpoc\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Block\BlockPluginInterface;
